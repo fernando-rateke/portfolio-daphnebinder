@@ -52,7 +52,7 @@ try {
     const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 })
     page.on('pageerror', (e) => console.error('[page]', e.message))
     await page.goto('http://localhost:5299/film.html?capture=1', { waitUntil: 'networkidle' })
-    await page.waitForFunction(() => window.__ready === true, null, { timeout: 120_000 })
+    await page.waitForFunction(() => window.__ready === true && window.__badgeReady === true, null, { timeout: 120_000 })
     // aquece shaders/texturas
     for (const t of [0, 3, 6, 9]) await page.evaluate((t) => window.__frame(t), t)
 

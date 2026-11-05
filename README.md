@@ -2,15 +2,19 @@
 
 Site-portfólio da designer **Daphne Binder** (desde 2015), feito a partir do portfólio original em PDF.
 A identidade foi mantida: rosa `#F3CEF0` + grafite `#1A1A1A`, fonte arredondada (Baloo 2), os cartões de título
-rosa entre as seções e o selo **“GRAPHICS BY DAPHNE BINDER • SINCE 2015”**.
+rosa entre as seções e o selo **“GRAPHICS BY DAPHNE BINDER • SINCE 2015”** com o Totoro da capa.
+
+> O Totoro vem da arte do portfólio original (`public/brand/`, extraída da capa do PDF). O personagem é
+> propriedade do Studio Ghibli; o uso aqui segue a escolha da própria Daphne na identidade dela.
 
 ## O que tem
 
 - **Vídeo de introdução** (10 s), renderizado a partir de uma cena 3D: partículas formam o selo, a câmera voa por
-  um túnel com os trabalhos e o mascote aparece com o nome. Versões horizontal (desktop) e vertical (celular/Reels).
+  um túnel com os trabalhos e o selo com o Totoro gira até a frente com o nome. Versões horizontal (desktop) e vertical (celular/Reels).
   Toca uma vez por sessão, dá para pular e respeita “reduzir movimento”.
-- **Hero 3D** com o mascote (um gatinho original, o “koneko”) que acompanha o mouse, o anel com o texto do selo e
-  trabalhos flutuando.
+- **Hero 3D**: o selo da Daphne vira uma medalha 3D (Totoro no centro, texto circular, borda arredondada) que
+  inclina com o mouse e gira de tempos em tempos, com um anel das áreas de atuação em volta e trabalhos flutuando.
+  Atrás do título, o selo gigante em tom sobre tom, como na capa do PDF.
 - **Twitch Graphics**: carrossel 3D arrastável com os 7 boards (clique para ampliar).
 - **Identidade Visual**: cards com inclinação 3D (iHeal, Artificers).
 - **Mídia Kits**: galeria horizontal em 3D, fixada durante o scroll (no celular, rolagem lateral com o dedo).
@@ -40,6 +44,9 @@ npm run dev
 - **Imagens dos trabalhos**: `public/work/` (WebP recortados do PDF; para trocar, mantenha o mesmo nome ou
   atualize o caminho em `src/data.js`).
 - **Cores e tipografia**: variáveis no topo de `src/styles.css`.
+- **Totoro**: `public/brand/totoro-shape.png` (silhueta preenchida) e `totoro-detail.png` (corpo/olhos/marcas).
+  São máscaras brancas com transparência, recoloridas via CSS (`src/components/Totoro.jsx`) e no 3D
+  (`src/three/TotoroBadge.jsx`).
 
 ## Regerar o vídeo de introdução
 
@@ -61,7 +68,7 @@ src/
   App.jsx            scroll suave + animações de scroll
   data.js            todo o conteúdo
   components/        seções (Hero, About, Twitch, Identity, MediaKits, Manu, UIUX, Contact…)
-  three/             cenas 3D (mascote, hero, carrossel, celulares)
+  three/             cenas 3D (selo do Totoro, hero, carrossel, celulares)
   film/              cena do vídeo de introdução
 scripts/render-intro.mjs   renderiza o vídeo quadro a quadro
 ```

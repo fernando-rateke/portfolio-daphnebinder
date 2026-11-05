@@ -1,4 +1,5 @@
 import Badge from './Badge.jsx'
+import Totoro from './Totoro.jsx'
 import { contact } from '../data.js'
 
 export default function Contact() {
@@ -6,7 +7,7 @@ export default function Contact() {
     <section className="contact dark" id="contato">
       <div className="wrap contact__inner">
         <Badge size={170} className="contact__badge spin" color="#f3cef0">
-          <span className="badge__d">D</span>
+          <Totoro body="#f3cef0" belly="rgba(243, 206, 240, 0.16)" className="badge__totoro" />
         </Badge>
         <p className="eyebrow" data-reveal>Contato</p>
         <h2 className="contact__title" data-split>

@@ -4,6 +4,7 @@ import { Environment, Lightformer } from '@react-three/drei'
 import * as THREE from 'three'
 
 export const BADGE_TEXT = 'GRAPHICS BY DAPHNE BINDER • SINCE 2015 • '
+export const SERVICES_TEXT = 'TWITCH GRAPHICS • IDENTIDADE VISUAL • MÍDIA KITS • SOCIAL MEDIA • UI/UX • '
 
 /** Luz de estúdio sem baixar HDR (tudo local). */
 export function StudioLights({ intensity = 1 }) {
@@ -24,6 +25,8 @@ export function StudioLights({ intensity = 1 }) {
 
 /** Textura com o texto do selo, desenhada num canvas (usa a fonte Baloo 2 já carregada). */
 export function useBadgeTexture({ color = '#1a1a1a', text = BADGE_TEXT, repeat = 2 } = {}) {
+  text ??= BADGE_TEXT
+  repeat ??= 2
   const [ready, setReady] = useState(false)
   const tex = useMemo(() => {
     const c = document.createElement('canvas')
@@ -66,8 +69,8 @@ export function useBadgeTexture({ color = '#1a1a1a', text = BADGE_TEXT, repeat =
 }
 
 /** Anel 3D com o texto do selo girando em volta do mascote. */
-export function RingBand({ radius = 2.4, height = 0.36, color = '#1a1a1a', speed = 0.25, getT, getOpacity, ...props }) {
-  const { tex } = useBadgeTexture({ color })
+export function RingBand({ radius = 2.4, height = 0.36, color = '#1a1a1a', speed = 0.25, text, repeat, getT, getOpacity, ...props }) {
+  const { tex } = useBadgeTexture({ color, text, repeat })
   const ref = useRef()
   const front = useRef()
   const back = useRef()

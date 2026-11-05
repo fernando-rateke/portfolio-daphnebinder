@@ -2,8 +2,8 @@ import { Suspense, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Float, RoundedBox, ContactShadows, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
-import Kitten from './Kitten.jsx'
-import { RingBand, StudioLights, roundedRectGeometry, prepTextures } from './shared.jsx'
+import TotoroBadge from './TotoroBadge.jsx'
+import { RingBand, SERVICES_TEXT, StudioLights, roundedRectGeometry, prepTextures } from './shared.jsx'
 
 const CARDS = [
   { src: '/work/twitch-02.webp', pos: [-0.6, 2.35, -4.2], rot: [0.12, 0.3, -0.1], w: 1.9 },
@@ -98,10 +98,10 @@ export default function HeroScene() {
       <group ref={rig}>
         <group position={[kx, ky, 0]} scale={scale}>
           <Float speed={1.4} rotationIntensity={0.15} floatIntensity={0.5}>
-            <Kitten />
+            <TotoroBadge />
           </Float>
-          <RingBand radius={2.35} height={0.34} rotation={[0.32, 0, -0.16]} position={[0, -0.25, 0]} />
-          <ContactShadows position={[0, -2.15, 0]} opacity={0.35} scale={7} blur={2.6} far={3} color="#7a3f74" />
+          <RingBand text={SERVICES_TEXT} repeat={1} radius={2.5} height={0.34} rotation={[0.38, 0, -0.16]} />
+          <ContactShadows position={[0, -2.3, 0]} opacity={0.35} scale={7} blur={2.6} far={3} color="#7a3f74" />
         </group>
         <Shapes mobile={mobile} />
         <Suspense fallback={null}>{!mobile && <Cards />}</Suspense>
