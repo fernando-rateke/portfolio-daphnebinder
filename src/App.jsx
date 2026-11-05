@@ -137,10 +137,27 @@ export default function App() {
         const track = document.querySelector('.kits__track')
         const pin = document.querySelector('.kits__pin')
         if (!track || !pin) return
+        const kits = gsap.utils.toArray('.kit')
         const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 80)
+        // efeito "coverflow": cada card gira/escurece conforme a distância do centro da tela,
+        // então todos se comportam igual, do primeiro ao último
+        const coverflow = () => {
+          const mid = window.innerWidth / 2
+          kits.forEach((k) => {
+            const r = k.getBoundingClientRect()
+            const d = gsap.utils.clamp(-1, 1, (r.left + r.width / 2 - mid) / (window.innerWidth * 0.6))
+            gsap.set(k, {
+              rotateY: -d * 22,
+              z: -Math.abs(d) * 140,
+              opacity: 1 - Math.abs(d) * 0.35,
+              transformPerspective: 1400,
+            })
+          })
+        }
         gsap.to(track, {
           x: () => -dist(),
           ease: 'none',
+          onUpdate: coverflow,
           scrollTrigger: {
             trigger: pin,
             start: 'top top',
@@ -148,17 +165,11 @@ export default function App() {
             pin: true,
             scrub: 0.8,
             invalidateOnRefresh: true,
+            onRefresh: coverflow,
           },
         })
-        gsap.utils.toArray('.kit').forEach((k, i) => {
-          gsap.from(k, {
-            rotateY: -35,
-            z: -200,
-            opacity: 0.2,
-            ease: 'none',
-            scrollTrigger: { trigger: pin, start: `top+=${i * 140 - 400} top`, end: `top+=${i * 140 + 200} top`, scrub: true },
-          })
-        })
+        coverflow()
+        return () => gsap.set(kits, { clearProps: 'transform,opacity' })
       })
 
       // imagens carregando tarde podem mudar alturas

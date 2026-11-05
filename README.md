@@ -10,14 +10,15 @@ rosa entre as seções e o selo **“GRAPHICS BY DAPHNE BINDER • SINCE 2015”
 ## O que tem
 
 - **Vídeo de introdução** (10 s), renderizado a partir de uma cena 3D: partículas formam o selo, a câmera voa por
-  um túnel com os trabalhos e o selo com o Totoro gira até a frente com o nome. Versões horizontal (desktop) e vertical (celular/Reels).
+  um túnel com os trabalhos, o selo gira até a frente, o Totoro 3D salta para dentro dele e o nome aparece. Versões horizontal (desktop) e vertical (celular/Reels).
   Toca uma vez por sessão, dá para pular e respeita “reduzir movimento”.
-- **Hero 3D**: o selo da Daphne vira uma medalha 3D (Totoro no centro, texto circular, borda arredondada) que
-  inclina com o mouse e gira de tempos em tempos, com um anel das áreas de atuação em volta e trabalhos flutuando.
+- **Hero 3D**: o Totoro em 3D (modelado em código, `src/three/Totoro3D.jsx`) na frente do selo da Daphne em
+  forma de medalha, como no logo dela. Ele acompanha o mouse, respira, pisca e mexe as orelhas; em volta, um anel
+  com as áreas de atuação e trabalhos flutuando.
   Atrás do título, o selo gigante em tom sobre tom, como na capa do PDF.
 - **Twitch Graphics**: carrossel 3D arrastável com os 7 boards (clique para ampliar).
 - **Identidade Visual**: cards com inclinação 3D (iHeal, Artificers).
-- **Mídia Kits**: galeria horizontal em 3D, fixada durante o scroll (no celular, rolagem lateral com o dedo).
+- **Mídia Kits**: galeria horizontal em “coverflow” 3D, fixada durante o scroll (no celular, rolagem lateral com o dedo).
 - **Manu Vieira**: social media e assessoria 2021–2023.
 - **UI/UX**: celulares 3D com as telas do Rastro e do Si.Go, mais o LockOn.
 - Scroll suave (Lenis), animações (GSAP), lightbox, cursor personalizado e layout responsivo.
@@ -46,7 +47,7 @@ npm run dev
 - **Cores e tipografia**: variáveis no topo de `src/styles.css`.
 - **Totoro**: `public/brand/totoro-shape.png` (silhueta preenchida) e `totoro-detail.png` (corpo/olhos/marcas).
   São máscaras brancas com transparência, recoloridas via CSS (`src/components/Totoro.jsx`) e no 3D
-  (`src/three/TotoroBadge.jsx`).
+  (`src/three/TotoroBadge.jsx`). As cores do Totoro 3D ficam no topo de `src/three/Totoro3D.jsx`.
 
 ## Regerar o vídeo de introdução
 

@@ -69,7 +69,7 @@ function drawCircleText(ctx, text, cx, cy, r, size, color) {
   ctx.restore()
 }
 
-function makeFace({ bg, text, belly, body, ring }, [shape, detail]) {
+function makeFace({ bg, text, belly, body, ring }, [shape, detail], withTotoro = true) {
   const S = 1024
   const c = document.createElement('canvas')
   c.width = c.height = S
@@ -83,7 +83,7 @@ function makeFace({ bg, text, belly, body, ring }, [shape, detail]) {
   ctx.arc(S / 2, S / 2, S * 0.36, 0, Math.PI * 2)
   ctx.stroke()
   drawCircleText(ctx, BADGE_TEXT, S / 2, S / 2, S * 0.42, 62, text)
-  drawTotoro(ctx, shape, detail, S / 2, S / 2 + 6, S * 0.5, belly, body)
+  if (withTotoro) drawTotoro(ctx, shape, detail, S / 2, S / 2 + 6, S * 0.5, belly, body)
   const tex = new THREE.CanvasTexture(c)
   tex.colorSpace = THREE.SRGBColorSpace
   tex.anisotropy = 8
@@ -98,7 +98,7 @@ const BACK = { bg: '#f3cef0', text: '#1a1a1a', belly: '#f8dcf5', body: '#1f1e24'
  * @param follow inclina na direção do ponteiro
  * @param spin   faz um giro completo de tempos em tempos
  */
-export default function TotoroBadge({ radius = 1.75, thickness = 0.24, getT, follow = true, spin = true, ...props }) {
+export default function TotoroBadge({ radius = 1.75, thickness = 0.24, getT, follow = true, spin = true, totoro = true, tiltAmount = 1, ...props }) {
   const tilt = useRef()
   const flip = useRef()
   const front = useRef()
@@ -117,7 +117,7 @@ export default function TotoroBadge({ radius = 1.75, thickness = 0.24, getT, fol
     let alive = true
     loadAssets().then(([shape, detail]) => {
       if (!alive) return
-      mats.face.map = makeFace(FRONT, [shape, detail])
+      mats.face.map = makeFace(FRONT, [shape, detail], totoro)
       mats.faceBack.map = makeFace(BACK, [shape, detail])
       mats.face.needsUpdate = mats.faceBack.needsUpdate = true
       window.__badgeReady = true
@@ -125,13 +125,13 @@ export default function TotoroBadge({ radius = 1.75, thickness = 0.24, getT, fol
     return () => {
       alive = false
     }
-  }, [mats])
+  }, [mats, totoro])
 
   useFrame((state, dt) => {
     const t = getT ? getT(state) : state.clock.elapsedTime
     if (tilt.current) {
-      const ty = follow ? state.pointer.x * 0.5 : Math.sin(t * 0.7) * 0.25
-      const tx = follow ? -state.pointer.y * 0.3 : Math.sin(t * 0.9) * 0.08
+      const ty = (follow ? state.pointer.x * 0.5 : Math.sin(t * 0.7) * 0.25) * tiltAmount
+      const tx = (follow ? -state.pointer.y * 0.3 : Math.sin(t * 0.9) * 0.08) * tiltAmount
       if (getT) tilt.current.rotation.set(tx, ty, 0)
       else {
         const k = Math.min(1, dt * 4)

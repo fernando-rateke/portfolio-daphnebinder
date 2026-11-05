@@ -3,6 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { Float, RoundedBox, ContactShadows, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import TotoroBadge from './TotoroBadge.jsx'
+import Totoro3D from './Totoro3D.jsx'
 import { RingBand, SERVICES_TEXT, StudioLights, roundedRectGeometry, prepTextures } from './shared.jsx'
 
 const CARDS = [
@@ -97,11 +98,15 @@ export default function HeroScene() {
       <StudioLights />
       <group ref={rig}>
         <group position={[kx, ky, 0]} scale={scale}>
-          <Float speed={1.4} rotationIntensity={0.15} floatIntensity={0.5}>
-            <TotoroBadge />
+          {/* o selo dela ao fundo e o Totoro 3D na frente, como no logo */}
+          <Float speed={1.1} rotationIntensity={0.08} floatIntensity={0.3}>
+            <TotoroBadge radius={1.95} position={[0, 0.2, -1.1]} totoro={false} spin={false} tiltAmount={0.35} />
           </Float>
-          <RingBand text={SERVICES_TEXT} repeat={1} radius={2.5} height={0.34} rotation={[0.38, 0, -0.16]} />
-          <ContactShadows position={[0, -2.3, 0]} opacity={0.35} scale={7} blur={2.6} far={3} color="#7a3f74" />
+          <Float speed={1.6} rotationIntensity={0.1} floatIntensity={0.45}>
+            <Totoro3D position={[0, -0.3, 0.2]} scale={0.92} />
+          </Float>
+          <RingBand text={SERVICES_TEXT} repeat={1} radius={2.7} height={0.27} rotation={[0.38, 0, -0.16]} position={[0, -0.35, 0]} />
+          <ContactShadows position={[0, -1.72, 0]} opacity={0.4} scale={7} blur={2.4} far={3} color="#7a3f74" />
         </group>
         <Shapes mobile={mobile} />
         <Suspense fallback={null}>{!mobile && <Cards />}</Suspense>

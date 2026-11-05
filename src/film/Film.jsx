@@ -3,6 +3,7 @@ import { Canvas, advance, useFrame, useThree } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import TotoroBadge from '../three/TotoroBadge.jsx'
+import Totoro3D from '../three/Totoro3D.jsx'
 import { RingBand, SERVICES_TEXT, StudioLights, roundedRectGeometry, prepTextures } from '../three/shared.jsx'
 import { filmImages } from '../data.js'
 
@@ -12,7 +13,7 @@ import { filmImages } from '../data.js'
  *
  *  0.0 – 2.6  partículas rosa se juntam e formam o selo "GRAPHICS BY DAPHNE BINDER"
  *  2.6 – 6.4  a câmera atravessa o selo e voa por um túnel com os trabalhos
- *  5.9 – 8.5  o selo com o Totoro gira até a frente e o nome "Daphne Binder" sobe
+ *  5.9 – 8.5  o selo gira até a frente, o Totoro 3D salta para dentro dele e o nome sobe
  *  8.9 – 10   transição circular para o rosa do site
  */
 export const DURATION = 10
@@ -33,7 +34,7 @@ const outBack = (x) => {
 }
 
 const RING_TILT = [0.32, 0, -0.16]
-const KITTEN_Z = -66
+const FINALE_Z = -66
 const TUNNEL_END = -58
 
 // ---------- câmera ----------
@@ -277,6 +278,7 @@ function WorkTunnel() {
 // ---------- selo final (Totoro) ----------
 function Finale() {
   const ref = useRef()
+  const toto = useRef()
   const size = useThree((s) => s.size)
   const portrait = size.height > size.width
   useFrame(() => {
@@ -288,11 +290,20 @@ function Finale() {
       ref.current.rotation.y = (1 - outCubic(p)) * -Math.PI * 2
       ref.current.position.y = (portrait ? 1.45 : 0.8) + Math.sin(t * 1.4) * 0.05
     }
+    if (toto.current) {
+      // o Totoro "salta" para frente do selo
+      const q = seg(t, 6.55, 7.25)
+      toto.current.scale.setScalar(Math.max(0.0001, outBack(q)) * 0.92)
+      toto.current.position.y = -0.3 + Math.sin(q * Math.PI) * 0.6
+    }
   })
   return (
-    <group ref={ref} position={[0, 0.85, KITTEN_Z]}>
-      <TotoroBadge getT={getT} follow={false} spin={false} />
-      <RingBand text={SERVICES_TEXT} repeat={1} radius={2.5} height={0.34} color="#f3cef0" getT={getT} speed={0.35} rotation={[0.38, 0, -0.16]} />
+    <group ref={ref} position={[0, 0.85, FINALE_Z]}>
+      <TotoroBadge radius={1.95} position={[0, 0.2, -1.1]} totoro={false} getT={getT} follow={false} spin={false} tiltAmount={0.35} />
+      <group ref={toto} position={[0, -0.3, 0.2]}>
+        <Totoro3D getT={getT} follow={false} />
+      </group>
+      <RingBand text={SERVICES_TEXT} repeat={1} radius={2.7} height={0.27} color="#f3cef0" getT={getT} speed={0.35} rotation={[0.38, 0, -0.16]} position={[0, -0.35, 0]} />
     </group>
   )
 }

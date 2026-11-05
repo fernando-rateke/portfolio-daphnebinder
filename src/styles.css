@@ -1246,3 +1246,10 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* mídia kits: no desktop o transform vem do coverflow (GSAP) */
+@media (min-width: 900px) {
+  .kit.tilt {
+    transition: none;
+  }
+}
