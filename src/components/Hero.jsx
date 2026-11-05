@@ -10,8 +10,8 @@ export default function Hero() {
   return (
     <section className="hero" id="top">
       {/* selo gigante em tom sobre tom, como na capa do portfólio */}
-      <Badge size="min(92vw, 980px)" className="hero__ghost" color="rgba(122, 63, 116, 0.09)">
-        <Totoro body="rgba(122, 63, 116, 0.08)" className="hero__ghost-totoro" />
+      <Badge size="min(64vw, 780px)" className="hero__ghost" color="rgba(122, 63, 116, 0.075)">
+        <Totoro body="rgba(122, 63, 116, 0.065)" className="hero__ghost-totoro" />
       </Badge>
       <LazyCanvas className="hero__canvas" camera={{ position: [0, 0, 9], fov: 35 }} shadows={false}>
         <HeroScene />
@@ -33,13 +33,6 @@ export default function Hero() {
             Contato
           </a>
         </div>
-      </div>
-      <Badge size={128} className="hero__badge spin">
-        <Totoro body="#1a1a1a" belly="#f8dcf5" className="badge__totoro" />
-      </Badge>
-      <div className="hero__scroll" aria-hidden="true">
-        <span>role</span>
-        <i />
       </div>
     </section>
   )

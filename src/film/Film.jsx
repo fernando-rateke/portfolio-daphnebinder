@@ -4,7 +4,7 @@ import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import TotoroBadge from '../three/TotoroBadge.jsx'
 import Totoro3D from '../three/Totoro3D.jsx'
-import { RingBand, SERVICES_TEXT, StudioLights, roundedRectGeometry, prepTextures } from '../three/shared.jsx'
+import { RingBand, StudioLights, roundedRectGeometry, prepTextures } from '../three/shared.jsx'
 import { filmImages } from '../data.js'
 
 /*
@@ -303,7 +303,6 @@ function Finale() {
       <group ref={toto} position={[0, -0.3, 0.2]}>
         <Totoro3D getT={getT} follow={false} />
       </group>
-      <RingBand text={SERVICES_TEXT} repeat={1} radius={2.7} height={0.27} color="#f3cef0" getT={getT} speed={0.35} rotation={[0.38, 0, -0.16]} position={[0, -0.35, 0]} />
     </group>
   )
 }

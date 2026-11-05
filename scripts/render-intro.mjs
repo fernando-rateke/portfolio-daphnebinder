@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Renderiza o filme de introdução (src/film) quadro a quadro e gera os vídeos
- * em public/intro/ com ffmpeg.
+ * em src/assets/intro/ com ffmpeg (o Vite dá um nome com hash a cada versão).
  *
  * Requisitos: ffmpeg no PATH e Playwright com Chromium
  *   (npm i -D playwright && npx playwright install chromium)
@@ -29,7 +29,7 @@ const args = Object.fromEntries(
 const FPS = Number(args.fps || 30)
 const DURATION = 10
 const root = resolve(import.meta.dirname, '..')
-const outDir = resolve(root, 'public/intro')
+const outDir = resolve(root, 'src/assets/intro')
 const tmp = resolve(root, '.film-frames')
 
 const FORMATS = {

@@ -40,7 +40,7 @@ export default function Twitch() {
   return (
     <section className="twitch" id="trabalhos">
       <TitleCard index="01" title={twitch.title} years={twitch.years} />
-      <div className="twitch__stage dark" style={{ '--collage': `url(${twitch.collage})` }}>
+      <div className="twitch__stage dark">
         <div className="wrap twitch__head">
           <p className="twitch__text" data-reveal>{twitch.text}</p>
           <p className="twitch__count" data-reveal>

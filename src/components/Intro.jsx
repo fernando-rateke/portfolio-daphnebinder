@@ -1,4 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+// importados pelo Vite: o nome final leva um hash do conteúdo, então um vídeo
+// novo sempre vira uma URL nova (nada de versão antiga presa no cache)
+import intro720 from '../assets/intro/intro-720.mp4'
+import intro1080 from '../assets/intro/intro-1080.mp4'
+import vertical720 from '../assets/intro/intro-vertical-720.mp4'
+import vertical1080 from '../assets/intro/intro-vertical-1080.mp4'
+import poster from '../assets/intro/poster.jpg'
+import posterVertical from '../assets/intro/poster-vertical.jpg'
 
 /**
  * Vídeo de introdução (renderizado a partir da cena 3D em src/film).
@@ -39,9 +47,7 @@ export default function Intro({ onDone }) {
   const portrait = window.innerHeight > window.innerWidth
   const px = Math.max(window.innerWidth, window.innerHeight) * (window.devicePixelRatio || 1)
   const hd = px > 1500
-  const src = portrait
-    ? `/intro/intro-vertical-${hd ? 1080 : 720}.mp4`
-    : `/intro/intro-${hd ? 1080 : 720}.mp4`
+  const src = portrait ? (hd ? vertical1080 : vertical720) : hd ? intro1080 : intro720
 
   return (
     <div className={`intro${leaving ? ' intro--leave' : ''}`}>
@@ -51,7 +57,7 @@ export default function Intro({ onDone }) {
         muted
         playsInline
         preload="auto"
-        poster={portrait ? '/intro/poster-vertical.jpg' : '/intro/poster.jpg'}
+        poster={portrait ? posterVertical : poster}
         onEnded={finish}
         onError={finish}
         onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime / (e.currentTarget.duration || 1))}

@@ -58,7 +58,7 @@ npm i -D playwright && npx playwright install chromium   # uma vez
 npm run render:intro                                     # precisa de ffmpeg instalado
 ```
 
-Gera em `public/intro/`: `intro-1080.mp4` / `intro-720.mp4` (16:9), `intro-vertical-1080.mp4` /
+Gera em `src/assets/intro/` (o Vite publica com nome versionado, sem problema de cache): `intro-1080.mp4` / `intro-720.mp4` (16:9), `intro-vertical-1080.mp4` /
 `intro-vertical-720.mp4` (9:16, bom para Instagram/TikTok), os posters e `public/og.jpg` (imagem de
 compartilhamento). Use `-- --preview` para gerar só alguns quadros de conferência.
 

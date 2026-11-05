@@ -36,7 +36,6 @@ export const twitch = {
   title: 'Twitch Graphics',
   years: '2015 — Atual',
   text: 'Overlays, telas de “offline” e “começando”, painéis, emotes e alertas para streamers. Mais de 50 clientes desde 2015.',
-  collage: w('twitch-collage'),
   items: [
     { src: w('twitch-01'), title: 'Aranho' },
     { src: w('twitch-02'), title: 'BelaBM' },
